@@ -6,12 +6,20 @@ use App\Repository\PersonRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToOne;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\MappedSuperclass;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
 
-#[InheritanceType("JOINED")]
-#[DiscriminatorColumn(name="discr", type="string")]
-#[DiscriminatorMap({"professor" = "Professor", "student" = "Student", "director" = "Director"})]
+
 #[ORM\Entity(repositoryClass: PersonRepository::class)]
-class Person implements UserInterface, PasswordAuthenticatedUserInterface
+#[ORM\MappedSuperclass(PersonRepository::class)]
+#[ORM\InheritanceType("JOINED")]
+#[ORM\DiscriminatorColumn('role_type', "string")]
+abstract class Person implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
 #[ApiResource]
-class Student
+class Student extends Person
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
