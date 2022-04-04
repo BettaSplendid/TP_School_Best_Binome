@@ -5,26 +5,33 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ProfessorRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: ProfessorRepository::class)]
 #[ApiResource]
+#[ApiResource(normalizationContext: ['groups' => ['read_professor']], denormalizationContext: ['groups' => ['write_professor']])]
+
 class Professor extends Person
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read_professor' ]
     private $id;
 
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read_professor', 'write_professor' ]
     private $Age;
 
     #[ORM\Column(type: 'date')]
+    #[Groups(['read_professor', 'write_professor' ]
     private $ArrivalDate;
 
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read_professor', 'write_professor' ]
     private $Salary;
 
     #[ORM\OneToOne(mappedBy: 'Instit', targetEntity: Section::class, cascade: ['persist', 'remove'])]
+    #[Groups(['read_professor', 'write_professor' ]
     private $section;
 
     public function getId(): ?int
