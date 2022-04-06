@@ -14,51 +14,30 @@ class AppFixtures extends Fixture
 
         $faker = Faker\Factory::create();
 
-        $Json = file_get_contents("testjson.json");
+        $Json = file_get_contents("src/DataFixtures/people2.json");
         // Converts to an array 
         $myarray = json_decode($Json, true);
 
-        var_dump($myarray);
-
-        // $json_file = 'people.json';
-        // settype($json_file, 'object');
-        // json_decode($json_file);
-        // $json_count = count($json_file);
-
-        // foreach ($variable as $key => $value) {
-        //     # code...
-        // }
-
-        $student = new Student();
-        // $pieces = explode(" ", $json_file);
-        // $student->setName($pieces[0]);
-        // $student->setFirstName($pieces[1]);7
-
-        $student->setName($faker->name);
-        $student->setFirstName(($faker->firstName));
-
-        $student->setEmail(($faker->email));
-        $student->setUsername(($faker->userName));
-        $student->setParentEmail1(($faker->email));
-
-        $student->setParentEmail2(($faker->email));
+        // var_dump($myarray);
+        // var_dump($myarray["CP"]);
 
 
-        $student->setGender((bool) mt_rand(0, 1));
+        foreach ($myarray["CP"] as $key => $value) {
+            // var_dump("Student: ");
+            // var_dump($myarray["CP"][$key0]);
+            $pieces = explode(" ", $myarray["CP"][$key]);
+            $student = new Student();
+            $student->setFirstName($pieces[0]);
+            $student->setName($pieces[1]);
+            $student->setEmail(($faker->email));
+            $student->setUsername($student->getName() . $student->getFirstName() . "du" . rand(0, 100));
+            $student->setParentEmail1(($student->getName() . $faker->firstName . "@" . $faker->freeEmailDomain));
+            $student->setParentEmail2(($faker->email));
+            $student->setGender((bool) mt_rand(0, 1));
+            $student->setPassword(rand());
 
-        $student->setPassword(rand());
-        // $student->setFirstName($pieces[1]);
-        // $student->setFirstName($pieces[1]);
-
-
-        $manager->persist($student);
-        $manager->flush();
-
-
-        // json_encode()
-
-
-
-
+            $manager->persist($student);
+            $manager->flush();
+        }
     }
 }
