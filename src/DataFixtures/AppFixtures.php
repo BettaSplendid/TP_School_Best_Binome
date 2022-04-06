@@ -13,8 +13,16 @@ class AppFixtures extends Fixture
     {
 
         $faker = Faker\Factory::create();
-        $json_file = 'people.json';
-        json_decode($json_file);
+
+        $Json = file_get_contents("testjson.json");
+        // Converts to an array 
+        $myarray = json_decode($Json, true);
+
+        var_dump($myarray);
+
+        // $json_file = 'people.json';
+        // settype($json_file, 'object');
+        // json_decode($json_file);
         // $json_count = count($json_file);
 
         // foreach ($variable as $key => $value) {
@@ -22,9 +30,11 @@ class AppFixtures extends Fixture
         // }
 
         $student = new Student();
-        $pieces = explode(" ", $json_file);
-        $student->setName($pieces[0]);
-        // $student->setFirstName($pieces[1]);
+        // $pieces = explode(" ", $json_file);
+        // $student->setName($pieces[0]);
+        // $student->setFirstName($pieces[1]);7
+
+        $student->setName($faker->name);
         $student->setFirstName(($faker->firstName));
 
         $student->setEmail(($faker->email));
