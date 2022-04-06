@@ -9,7 +9,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: DirectorRepository::class)]
 #[ApiResource]
 #[ApiResource(normalizationContext: ['groups' => ['read_director']], denormalizationContext: ['groups' => ['write_director']])]
-class Director
+class Director extends Person
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
