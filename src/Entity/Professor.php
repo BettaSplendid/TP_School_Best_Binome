@@ -15,23 +15,23 @@ class Professor extends Person
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read_professor' ]
+    #[Groups(['read_professor' ])]
     private $id;
 
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read_professor', 'write_professor' ]
+    #[Groups(['read_professor', 'write_professor' ])]
     private $Age;
 
     #[ORM\Column(type: 'date')]
-    #[Groups(['read_professor', 'write_professor' ]
+    #[Groups(['read_professor', 'write_professor' ])]
     private $ArrivalDate;
 
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read_professor', 'write_professor' ]
+    #[Groups(['read_professor', 'write_professor' ])]
     private $Salary;
 
     #[ORM\OneToOne(mappedBy: 'Instit', targetEntity: Section::class, cascade: ['persist', 'remove'])]
-    #[Groups(['read_professor', 'write_professor' ]
+    #[Groups(['read_professor', 'write_professor' ])]
     private $section;
 
     public function getId(): ?int
