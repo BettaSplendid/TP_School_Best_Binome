@@ -13,10 +13,50 @@ security:
             entity:
                 class: App\Entity\Person
                 property: email
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        login:
+            pattern: ^/api/login
+            stateless: true
+            json_login:
+                check_path: /api/login_check # or api_login_check as defined in config/routes.yaml
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        
+        students:
+            pattern : api/students
+            stateless : true
+            jwt: ~
+            methods: [GET, POST, PUT, PATCH, DELETE]
+        
+        professors:
+            pattern : api/professors
+            stateless : true
+            jwt: ~
+            methods: [GET, POST, PUT, PATCH, DELETE]
+
+        sections:
+            pattern : api/sections
+            stateless : true
+            jwt: ~
+            methods: [GET, POST, PUT, PATCH, DELETE]
+
+        matters:
+            pattern : api/matters
+            stateless : true
+            jwt: ~
+            methods: [GET, POST, PUT, PATCH, DELETE]
+
+        grades:
+            pattern : api/grades
+            stateless : true
+            jwt: ~
+            methods: [GET, POST, PUT, PATCH, DELETE]
+
         main:
             lazy: true
             provider: app_user_provider
@@ -30,6 +70,12 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        - { path: ^/api/articles, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/professors, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/sections, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/matters, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/grades, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
