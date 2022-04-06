@@ -21,7 +21,7 @@ class AppFixtures extends Fixture
         // var_dump($myarray);
         // var_dump($myarray["CP"]);
 
-
+        
         foreach ($myarray["CP"] as $key => $value) {
             // var_dump("Student: ");
             // var_dump($myarray["CP"][$key0]);
