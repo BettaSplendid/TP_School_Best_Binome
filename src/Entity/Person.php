@@ -21,6 +21,7 @@ use Doctrine\ORM\Mapping\DiscriminatorColumn;
 #[ORM\DiscriminatorColumn('role_type', "string")]
 abstract class Person implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -100,7 +101,7 @@ abstract class Person implements UserInterface, PasswordAuthenticatedUserInterfa
 
     public function setPassword(string $password): self
     {
-        $this->password = $password;
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
 
         return $this;
     }
