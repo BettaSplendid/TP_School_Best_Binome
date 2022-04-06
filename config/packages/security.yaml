@@ -39,6 +39,12 @@ security:
             jwt: ~
             methods: [GET, POST, PUT, PATCH, DELETE]
 
+        directors:
+            pattern : api/professors
+            stateless : true
+            jwt: ~
+            methods: [GET, POST, PUT, PATCH, DELETE]
+
         sections:
             pattern : api/sections
             stateless : true
@@ -73,6 +79,7 @@ security:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/articles, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/professors, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/directors, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/sections, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/matters, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/grades, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
