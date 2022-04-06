@@ -7,7 +7,7 @@ use App\Repository\StudentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
-#[ApiResource]
+// #[ApiResource]
 #[ApiResource(normalizationContext: ['groups' => ['read_student']], denormalizationContext: ['groups' => ['write_student']])]
 class Student extends Person
 {

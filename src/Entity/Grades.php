@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: GradesRepository::class)]
-#[ApiResource]
+// #[ApiResource]
 #[ApiResource(normalizationContext: ['groups' => ['read_grades']], denormalizationContext: ['groups' => ['write_grades']])]
 class Grades
 {
