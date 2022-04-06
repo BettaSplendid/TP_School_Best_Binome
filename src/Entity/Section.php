@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SectionRepository::class)]
-// #[ApiResource]
 #[ApiResource(normalizationContext: ['groups' => ['read_section']], denormalizationContext: ['groups' => ['write_section']])]
 
 class Section

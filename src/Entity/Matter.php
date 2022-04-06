@@ -11,7 +11,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 
 #[ORM\Entity(repositoryClass: MatterRepository::class)]
-// #[ApiResource]
 #[ApiResource(normalizationContext: ['groups' => ['read_matter']], denormalizationContext: ['groups' => ['write_matter']])]
 class Matter
 {
