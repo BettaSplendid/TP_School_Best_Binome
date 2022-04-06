@@ -8,6 +8,7 @@ use App\Entity\Student;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
+use stdClass;
 
 class AppFixtures extends Fixture
 {
@@ -83,13 +84,6 @@ class AppFixtures extends Fixture
         $manager->flush();
 
 
-
-        // private $email;
-        // private $roles = [];
-        // private $password;
-        // private $Username;
-        // private $Name;
-        // private $FirstName;
 
 
     }
