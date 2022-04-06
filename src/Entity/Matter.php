@@ -7,20 +7,26 @@ use App\Repository\MatterRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 #[ORM\Entity(repositoryClass: MatterRepository::class)]
 #[ApiResource]
+#[ApiResource(normalizationContext: ['groups' => ['read_matter']], denormalizationContext: ['groups' => ['write_matter']])]
 class Matter
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read_matter' ])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read_matter', 'write_matter' ])]
     private $Title;
 
     #[ORM\OneToMany(mappedBy: 'matter_id', targetEntity: Grades::class)]
+    #[Groups(['read_matter', 'write_matter' ])]
     private $grades;
 
     public function __construct()
