@@ -5,26 +5,32 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\StudentRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
 #[ApiResource]
+#[ApiResource(normalizationContext: ['groups' => ['read_student']], denormalizationContext: ['groups' => ['write_student']])]
 class Student extends Person
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read_student'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read_student', 'write_student' ])]
     private $parent_email_1;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['read_student', 'write_student' ])]
     private $parent_email_2;
 
     #[ORM\Column(type: 'boolean')]
+    #[Groups(['read_student', 'write_student' ])]
     private $Gender;
 
     #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'Eleve')]
+    #[Groups(['read_student', 'write_student' ])]
     private $section;
 
     public function getId(): ?int

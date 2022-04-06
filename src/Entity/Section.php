@@ -7,23 +7,30 @@ use App\Repository\SectionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SectionRepository::class)]
 #[ApiResource]
+#[ApiResource(normalizationContext: ['groups' => ['read_section']], denormalizationContext: ['groups' => ['write_section']])]
+
 class Section
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read_section' ])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read_section', 'write_section' ])]
     private $Name;
 
     #[ORM\OneToOne(inversedBy: 'section', targetEntity: Professor::class, cascade: ['persist', 'remove'])]
+    #[Groups(['read_section', 'write_section' ])]
     private $Instit;
 
     #[ORM\OneToMany(mappedBy: 'section', targetEntity: Student::class)]
+    #[Groups(['read_section', 'write_section' ])]
     private $Eleve;
 
     public function __construct()
