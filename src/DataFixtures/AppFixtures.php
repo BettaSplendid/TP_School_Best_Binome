@@ -8,6 +8,7 @@ use App\Entity\Student;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
+use stdClass;
 
 class AppFixtures extends Fixture
 {
@@ -24,11 +25,6 @@ class AppFixtures extends Fixture
         // var_dump($myarray["CP"]);
 
         var_dump("Student: ");
-
-        //faux etudiant pour connexion 
-        $studenta = (new Student())->setFirstName("Amelie")->setName("KLEIN")->setUsername("ak54")->setEmail("ak@gmail.com")->setGender(0)->setPassword("123");
-        $studenta->setParentEmail1("22@gmaikl.fr");
-        $manager->persist($studenta);
 
         foreach ($myarray["CP"] as $key => $value) {
             // var_dump($myarray["CP"][$key0]);
@@ -87,12 +83,16 @@ class AppFixtures extends Fixture
         $manager->persist($prof);
         $manager->flush();
 
+<<<<<<< HEAD
         // private $email;
         // private $roles = [];
         // private $password;
         // private $Username;
         // private $Name;
         // private $FirstName;
+=======
+
+>>>>>>> b4d7b304c19e43de9efee61a456f71752dfebbba
 
 
 
