@@ -12,7 +12,8 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\Person
-                property: email
+                # property: email
+                property: Username
 
     firewalls:
         dev:
@@ -24,9 +25,18 @@ security:
             stateless: true
             json_login:
                 check_path: /api/login_check # or api_login_check as defined in config/routes.yaml
+                #pour définir les pram de connexion :
+                username_path: Username
+                password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
         
+        persons:
+            pattern : api/persons
+            stateless : true
+            jwt: ~
+            methods: [GET, POST, PUT, PATCH, DELETE]
+
         students:
             pattern : api/students
             stateless : true
@@ -40,7 +50,7 @@ security:
             methods: [GET, POST, PUT, PATCH, DELETE]
 
         directors:
-            pattern : api/professors
+            pattern : api/directors
             stateless : true
             jwt: ~
             methods: [GET, POST, PUT, PATCH, DELETE]
@@ -82,12 +92,13 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
-        - { path: ^/api/articles, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
-        - { path: ^/api/professors, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
-        - { path: ^/api/directors, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
-        - { path: ^/api/sections, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
-        - { path: ^/api/matters, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
-        - { path: ^/api/grades, roles: IS_AUTHENTICATED_FULLY, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/persons, roles: PUBLIC_ACCESS, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/students, roles: PUBLIC_ACCESS, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/professors, roles: PUBLIC_ACCESS,, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/directors, roles: PUBLIC_ACCESS,, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/sections, roles: PUBLIC_ACCESS,, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/matters, roles: PUBLIC_ACCESS,, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/grades, roles: PUBLIC_ACCESS,, methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/(login|token/refresh), roles: PUBLIC_ACCESS }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
