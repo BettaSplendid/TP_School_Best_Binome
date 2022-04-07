@@ -31,6 +31,10 @@ class AppFixtures extends Fixture
         $studenta->setParentEmail1("22@gmaikl.fr");
         $manager->persist($studenta);
 
+        $studentb = (new Student())->setFirstName("Amelie")->setName("KLEIN")->setUsername("ak542")->setEmail("ak2@gmail.com")->setGender(0)->setPassword("123");
+        $studentb->setParentEmail1("22@gmaikl.fr");
+        $manager->persist($studentb);
+
         foreach ($myarray["CP"] as $key => $value) {
             // var_dump($myarray["CP"][$key0]);
             $pieces = explode(" ", $myarray["CP"][$key]);
@@ -96,4 +100,5 @@ class AppFixtures extends Fixture
         // private $FirstName;
 
     }
+
 }
