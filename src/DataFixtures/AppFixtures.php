@@ -88,18 +88,12 @@ class AppFixtures extends Fixture
         $manager->persist($prof);
         $manager->flush();
 
-<<<<<<< HEAD
         // private $email;
         // private $roles = [];
         // private $password;
         // private $Username;
         // private $Name;
         // private $FirstName;
-=======
-
->>>>>>> b4d7b304c19e43de9efee61a456f71752dfebbba
-
-
 
     }
 }
