@@ -26,6 +26,11 @@ class AppFixtures extends Fixture
 
         var_dump("Student: ");
 
+        //faux etudiant pour connexion 
+        $studenta = (new Student())->setFirstName("Amelie")->setName("KLEIN")->setUsername("ak54")->setEmail("ak@gmail.com")->setGender(0)->setPassword("123");
+        $studenta->setParentEmail1("22@gmaikl.fr");
+        $manager->persist($studenta);
+
         foreach ($myarray["CP"] as $key => $value) {
             // var_dump($myarray["CP"][$key0]);
             $pieces = explode(" ", $myarray["CP"][$key]);
