@@ -94,11 +94,11 @@ security:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/persons, roles: PUBLIC_ACCESS, methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/students, roles: PUBLIC_ACCESS, methods: [GET, POST, PUT, PATCH, DELETE] }
-        - { path: ^/api/professors, roles: PUBLIC_ACCESS,, methods: [GET, POST, PUT, PATCH, DELETE] }
-        - { path: ^/api/directors, roles: PUBLIC_ACCESS,, methods: [GET, POST, PUT, PATCH, DELETE] }
-        - { path: ^/api/sections, roles: PUBLIC_ACCESS,, methods: [GET, POST, PUT, PATCH, DELETE] }
-        - { path: ^/api/matters, roles: PUBLIC_ACCESS,, methods: [GET, POST, PUT, PATCH, DELETE] }
-        - { path: ^/api/grades, roles: PUBLIC_ACCESS,, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/professors, roles: PUBLIC_ACCESS, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/directors, roles: PUBLIC_ACCESS, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/sections, roles: PUBLIC_ACCESS, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/matters, roles: PUBLIC_ACCESS, methods: [GET, POST, PUT, PATCH, DELETE] }
+        - { path: ^/api/grades, roles: PUBLIC_ACCESS, methods: [GET, POST, PUT, PATCH, DELETE] }
         - { path: ^/api/(login|token/refresh), roles: PUBLIC_ACCESS }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
