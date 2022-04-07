@@ -50,7 +50,7 @@ class AppFixtures extends Fixture
 
         //faux etudiant pour connexion 
         $special_student = (new Student())->setFirstName("Amelie")->setName("KLEIN")->setUsername("ak54")
-            ->setEmail("ak@gmail.com")->setGender(0)->setPassword("123");
+            ->setEmail("ak@gmail.com")->setGender(0)->setPassword("123")->setSection($manager->getRepository(Section::class)->findBy(['Name' => 'CP'])[0]);
         $special_student->setParentEmail1("22@gmaikl.fr");
         $manager->persist($special_student);
 
