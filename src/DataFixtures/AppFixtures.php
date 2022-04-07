@@ -19,6 +19,7 @@ class AppFixtures extends Fixture
         $Json = file_get_contents("src/DataFixtures/people2.json");
         $myarray = json_decode($Json, true);
         // var_dump($myarray);
+        // var_dump(array_keys($myarray));
 
 
         var_dump("Generating Sections: ");
@@ -57,24 +58,26 @@ class AppFixtures extends Fixture
         $studentb->setParentEmail1("22@gmaikl.fr");
         $manager->persist($studentb);
 
-        foreach ($myarray["CP"] as $key => $value) {
-            // var_dump($myarray["CP"][$key0]);
-            $pieces = explode(" ", $myarray["CP"][$key]);
-            $student = new Student();
-            $student->setFirstName($pieces[0]);
-            $student->setName($pieces[1]);
-            $student->setUsername($student->getName() . $student->getFirstName() . "du" . rand(0, 100));
-            $student->setEmail(($student->getUsername() . rand() . "@" . $faker->freeEmailDomain));
-            $student->setParentEmail1(($student->getName() . $faker->firstName . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
-            $student->setParentEmail2(($student->getName() . $faker->firstName . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
-            $student->setGender((bool) mt_rand(0, 1));
-            $student->setPassword(rand());
-            $result = $manager->getRepository(Section::class)->findOneBy(['Name' => "CP"]);
-            $student->setSection($manager->getRepository(Section::class)->findOneBy(['Name' => 'CP']));
-            // $student->setSection($manager->getRepository(Section::class)->findBy(['Name' => $all_profs[$key]->section])[0]);
+        $liste_classes = array_keys($myarray);
 
-            $manager->persist($student);
-            $manager->flush();
+        foreach ($liste_classes as $key => $value) {
+            $current_array = $value;
+            foreach ($myarray[$current_array] as $key => $value) {
+                // var_dump($myarray["CP"][$key0]);
+                $pieces = explode(" ", $myarray[$current_array][$key]);
+                $student = new Student();
+                $student->setFirstName($pieces[0]);
+                $student->setName($pieces[1]);
+                $student->setUsername($student->getName() . $student->getFirstName() . "du" . rand(0, 100));
+                $student->setEmail(($student->getUsername() . rand() . "@" . $faker->freeEmailDomain));
+                $student->setParentEmail1(($student->getName() . $faker->firstName . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
+                $student->setParentEmail2(($student->getName() . $faker->firstName . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
+                $student->setGender((bool) mt_rand(0, 1));
+                $student->setPassword(rand());
+                $student->setSection($manager->getRepository(Section::class)->findOneBy(['Name' => $current_array]));
+                $manager->persist($student);
+                $manager->flush();
+            }
         }
 
         Var_dump("Generating Professors: ");
@@ -105,6 +108,6 @@ class AppFixtures extends Fixture
 
 
         $manager->flush();
+        var_dump("Data fixtures loaded, you are clear, champion!");
     }
-
 }
