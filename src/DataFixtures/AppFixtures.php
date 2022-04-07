@@ -8,7 +8,6 @@ use App\Entity\Student;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
-use stdClass;
 
 class AppFixtures extends Fixture
 {
@@ -19,7 +18,7 @@ class AppFixtures extends Fixture
         $faker = Faker\Factory::create();
         $Json = file_get_contents("src/DataFixtures/people2.json");
         $myarray = json_decode($Json, true);
-        var_dump($myarray);
+        // var_dump($myarray);
 
 
         var_dump("Generating Sections: ");
@@ -66,7 +65,9 @@ class AppFixtures extends Fixture
             $student->setParentEmail2(($student->getName() . $faker->firstName . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
             $student->setGender((bool) mt_rand(0, 1));
             $student->setPassword(rand());
-            $student->setSection($manager->getRepository(Section::class)->findBy(['Name' => 'CP'])[0]);
+            $result = $manager->getRepository(Section::class)->findOneBy(['Name' => "CP"]);
+            $student->setSection($manager->getRepository(Section::class)->findOneBy(['Name' => 'CP']));
+            // $student->setSection($manager->getRepository(Section::class)->findBy(['Name' => $all_profs[$key]->section])[0]);
 
             $manager->persist($student);
             $manager->flush();
@@ -97,7 +98,6 @@ class AppFixtures extends Fixture
             $prof->setSalary(rand(1000, 2300));
             $manager->persist($prof);
         }
-
 
 
         $manager->flush();
