@@ -24,6 +24,7 @@ class Section
     #[Groups(['read_section', 'write_section' ])]
     private $Name;
 
+    #[ORM\JoinColumn(onDelete:"CASCADE")]
     #[ORM\OneToOne(inversedBy: 'section', targetEntity: Professor::class, cascade: ['persist', 'remove'])]
     #[Groups(['read_section', 'write_section' ])]
     private $Instit;
