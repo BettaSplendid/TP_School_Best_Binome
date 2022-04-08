@@ -10,11 +10,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(normalizationContext: ['groups' => ['read_student']], denormalizationContext: ['groups' => ['write_student']])]
 class Student extends Person
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    #[Groups(['read_student'])]
-    private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Groups(['read_student', 'write_student' ])]
@@ -32,11 +27,6 @@ class Student extends Person
     #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'Eleve')]
     #[Groups(['read_student', 'write_student' ])]
     private $section;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getParentEmail1(): ?string
     {

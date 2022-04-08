@@ -10,14 +10,5 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(normalizationContext: ['groups' => ['read_director']], denormalizationContext: ['groups' => ['write_director']])]
 class Director extends Person
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    #[Groups(['read_director'])]
-    private $id;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 }

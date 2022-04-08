@@ -12,11 +12,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 class Professor extends Person
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    #[Groups(['read_professor'])]
-    private $id;
 
     #[ORM\Column(type: 'integer')]
     #[Groups(['read_professor', 'write_professor'])]
@@ -33,11 +28,6 @@ class Professor extends Person
     #[ORM\OneToOne(mappedBy: 'Instit', targetEntity: Section::class, cascade: ['persist', 'remove'])]
     #[Groups(['read_professor', 'write_professor'])]
     private $section;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getAge(): ?int
     {

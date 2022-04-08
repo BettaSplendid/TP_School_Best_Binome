@@ -29,31 +29,31 @@ abstract class Person implements UserInterface, PasswordAuthenticatedUserInterfa
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     #[Groups(['read_person'])]
-    private $id;
+    protected $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Groups(['read_person', 'write_person' ])]
-    private $email;
+    protected $email;
 
     #[ORM\Column(type: 'json')]
     #[Groups(['read_person', 'write_person' ])]
-    private $roles = [];
+    protected $roles = [];
 
     #[ORM\Column(type: 'string')]
     #[Groups(['read_person', 'write_person' ])]
-    private $password;
+    protected $password;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
     #[Groups(['read_person', 'write_person' ])]
-    private $Username;
+    protected $Username;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Groups(['read_person', 'write_person' ])]
-    private $Name;
+    protected $Name;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Groups(['read_person', 'write_person' ])]
-    private $FirstName;
+    protected $FirstName;
 
     public function getId(): ?int
     {
