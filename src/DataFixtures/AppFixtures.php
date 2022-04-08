@@ -53,8 +53,9 @@ class AppFixtures extends Fixture
             ->setEmail("ak@gmail.com")->setGender(0)->setPassword("123")->setSection($manager->getRepository(Section::class)->findBy(['Name' => 'CP'])[0]);
         $special_student->setParentEmail1("22@gmaikl.fr");
         $manager->persist($special_student);
-
-        $studentb = (new Student())->setFirstName("Amelie")->setName("KLEIN")->setUsername("ak542")->setEmail("ak2@gmail.com")->setGender(0)->setPassword("123");
+        
+        $studentb = (new Student())->setFirstName("Amelie")->setName("KLEIN")->setUsername("ak542")
+            ->setEmail("ak2@gmail.com")->setGender(0)->setPassword("123");
         $studentb->setParentEmail1("22@gmaikl.fr");
         $manager->persist($studentb);
 
