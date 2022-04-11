@@ -32,7 +32,6 @@ class AppFixtures extends Fixture
         // var_dump($myarray);
         // var_dump(array_keys($myarray));
 
-
         var_dump("Generating Sections: ");
         $cp = new Section();
         $cp->setName("CP");
@@ -78,6 +77,14 @@ class AppFixtures extends Fixture
         
         $manager->persist($special_student_2);
 
+        $director = new Director();
+        $director_password = $this->encoder->hashPassword($director, "director");
+        $director->setFirstName("Jean-Jacques")->setName("Goldman")->setUsername("admin")->setEmail("admin@gmail.com")-> setRoles(["ROLE_ADMIN"]);
+        $director->setPassword($director_password);
+        
+        $manager->persist($director);
+
+
         $liste_classes = array_keys($myarray);
 
         foreach ($liste_classes as $key => $value) {
@@ -86,7 +93,7 @@ class AppFixtures extends Fixture
                 // var_dump($myarray["CP"][$key0]);
                 $pieces = explode(" ", $myarray[$current_array][$key]);
                 $student = new Student();
-                $student->setFirstName($pieces[0]);
+                $student->setFirstName($pieces[0])-> setRoles(["ROLE_STUDENT"]);
                 $student->setName($pieces[1]);
                 $student->setUsername($student->getName() . $student->getFirstName() . "du" . rand(0, 100));
                 $student->setEmail(($student->getUsername() . rand() . "@" . $faker->freeEmailDomain));
@@ -112,7 +119,7 @@ class AppFixtures extends Fixture
         // var_dump($all_profs);
         foreach ($all_profs as $key => $value) {
             // var_dump($all_profs[$key]);
-            $prof = new Professor();
+            $prof = (new Professor())-> setRoles(["ROLE_PROF"]) ;
             $prof->setName($all_profs[$key]->name);
             $prof->setFirstName($all_profs[$key]->firstname);
             $prof->setSection($manager->getRepository(Section::class)->findBy(['Name' => $all_profs[$key]->section])[0]);
@@ -125,7 +132,6 @@ class AppFixtures extends Fixture
             $prof->setSalary(rand(1000, 2300));
             $manager->persist($prof);
         }
-
 
         $manager->flush();
         var_dump("Data fixtures loaded, you are clear, champion!");
