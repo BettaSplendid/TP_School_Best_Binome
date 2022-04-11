@@ -8,13 +8,6 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\OneToOne;
-use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\MappedSuperclass;
-use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\DiscriminatorColumn;
 
 
 #[ORM\Entity(repositoryClass: PersonRepository::class)]
@@ -111,7 +104,7 @@ abstract class Person implements UserInterface, PasswordAuthenticatedUserInterfa
 
     public function setPassword(string $password): self
     {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $this->password = $password;
 
         return $this;
     }

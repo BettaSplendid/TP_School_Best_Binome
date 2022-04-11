@@ -5,12 +5,23 @@ namespace App\DataFixtures;
 use App\Entity\Professor;
 use App\Entity\Section;
 use App\Entity\Student;
+use App\Entity\Director;
+
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Faker;
 
 class AppFixtures extends Fixture
 {
+
+    private UserPasswordHasherInterface $encoder;
+
+    public function __construct(UserPasswordHasherInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
     public function load(ObjectManager $manager): void
     {
 
@@ -49,15 +60,23 @@ class AppFixtures extends Fixture
         var_dump("Generating Students: ");
 
         //faux etudiant pour connexion 
-        $special_student = (new Student())->setFirstName("Amelie")->setName("KLEIN")->setUsername("ak54")
-            ->setEmail("ak@gmail.com")->setGender(0)->setPassword("123")->setSection($manager->getRepository(Section::class)->findBy(['Name' => 'CP'])[0]);
+
+        $special_student = new Student();
+        $special_student_password = $this->encoder->hashPassword($special_student, "123");
+        $special_student->setFirstName("Amelie")->setName("KLEIN")->setUsername("ak54")->setEmail("ak@gmail.com")->setGender(0);
+        $special_student->setSection($manager->getRepository(Section::class)->findBy(['Name' => 'CP'])[0]);
         $special_student->setParentEmail1("22@gmaikl.fr");
+        $special_student->setPassword($special_student_password);
+
         $manager->persist($special_student);
+
+        $special_student_2 = new Student();
+        $special_student_2_password = $this->encoder->hashPassword($special_student_2, "123");
+        $special_student_2->setFirstName("Amelie")->setName("KLEIN")->setUsername("ak542")->setEmail("ak2@gmail.com")->setGender(0);
+        $special_student_2->setParentEmail1("22@gmaikl.fr");
+        $special_student_2->setPassword($special_student_2_password);
         
-        $studentb = (new Student())->setFirstName("Amelie")->setName("KLEIN")->setUsername("ak542")
-            ->setEmail("ak2@gmail.com")->setGender(0)->setPassword("123");
-        $studentb->setParentEmail1("22@gmaikl.fr");
-        $manager->persist($studentb);
+        $manager->persist($special_student_2);
 
         $liste_classes = array_keys($myarray);
 
