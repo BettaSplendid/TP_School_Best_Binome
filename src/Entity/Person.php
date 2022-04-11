@@ -14,6 +14,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 #[ORM\MappedSuperclass(PersonRepository::class)]
 #[ORM\InheritanceType("JOINED")]
 #[ORM\DiscriminatorColumn('role_type', "string")]
+#[ORM\DiscriminatorMap(["student" => "Student", "professor" => "Professor", "director" => "Director"])]
 #[ApiResource(normalizationContext: ['groups' => ['read_person']], denormalizationContext: ['groups' => ['write_person']])]
 abstract class Person implements UserInterface, PasswordAuthenticatedUserInterface
 {
