@@ -64,7 +64,7 @@ class AppFixtures extends Fixture
         $special_student_password = $this->encoder->hashPassword($special_student, "123");
         $special_student->setFirstname("Amelie")->setName("KLEIN")->setUsername("ak54")->setEmail("ak@gmail.com")->setGender(0);
         $special_student->setSection($manager->getRepository(Section::class)->findBy(['Name' => 'CP'])[0]);
-        $special_student->setParentEmail1("22@gmaikl.fr");
+        $special_student->setParent1("22@gmaikl.fr");
         $special_student->setPassword($special_student_password);
 
         $manager->persist($special_student);
@@ -72,7 +72,7 @@ class AppFixtures extends Fixture
         $special_student_2 = new Student();
         $special_student_2_password = $this->encoder->hashPassword($special_student_2, "123");
         $special_student_2->setFirstname("Amelie")->setName("KLEIN")->setUsername("ak542")->setEmail("ak2@gmail.com")->setGender(0);
-        $special_student_2->setParentEmail1("22@gmaikl.fr");
+        $special_student_2->setParent1("22@gmaikl.fr");
         $special_student_2->setPassword($special_student_2_password);
         
         $manager->persist($special_student_2);
@@ -97,8 +97,8 @@ class AppFixtures extends Fixture
                 $student->setName($pieces[1]);
                 $student->setUsername($student->getName() . $student->getFirstname() . "du" . rand(0, 100));
                 $student->setEmail(($student->getUsername() . rand() . "@" . $faker->freeEmailDomain));
-                $student->setParentEmail1(($student->getName() . $faker->firstname . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
-                $student->setParentEmail2(($student->getName() . $faker->firstname . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
+                $student->setParent1(($student->getName() . $faker->firstname . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
+                $student->setParent2(($student->getName() . $faker->firstname . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
                 $student->setGender((bool) mt_rand(0, 1));
                 $student->setPassword(rand());
                 $student->setSection($manager->getRepository(Section::class)->findOneBy(['Name' => $current_array]));

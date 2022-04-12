@@ -13,11 +13,11 @@ class Student extends Person
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Groups(['read_student', 'write_student' ])]
-    private $parent_email_1;
+    private $parent1;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['read_student', 'write_student' ])]
-    private $parent_email_2;
+    private $parent2;
 
     #[ORM\Column(type: 'boolean')]
     #[Groups(['read_student', 'write_student' ])]
@@ -28,26 +28,26 @@ class Student extends Person
     #[Groups(['read_student', 'write_student' ])]
     private $section;
 
-    public function getParentEmail1(): ?string
+    public function getParent1(): ?string
     {
-        return $this->parent_email_1;
+        return $this->parent1;
     }
 
-    public function setParentEmail1(string $parent_email_1): self
+    public function setParent1(string $parent1): self
     {
-        $this->parent_email_1 = $parent_email_1;
+        $this->parent1 = $parent1;
 
         return $this;
     }
 
-    public function getParentEmail2(): ?string
+    public function getParent2(): ?string
     {
-        return $this->parent_email_2;
+        return $this->parent2;
     }
 
-    public function setParentEmail2(?string $parent_email_2): self
+    public function setParent2(?string $parent2): self
     {
-        $this->parent_email_2 = $parent_email_2;
+        $this->parent2 = $parent2;
 
         return $this;
     }
