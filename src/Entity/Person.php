@@ -22,31 +22,36 @@ abstract class Person implements UserInterface, PasswordAuthenticatedUserInterfa
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read_person'])]
+    #[Groups(['read_person', "read_professor", "read_student", "read_director"])]
     protected $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Groups(['read_person', 'write_person' ])]
+    #[Groups(['read_person', 'write_person', "read_professor" , "write_professor", "read_student", "write_student", "read_director" ])]
     protected $email;
 
     #[ORM\Column(type: 'json')]
-    #[Groups(['read_person', 'write_person' ])]
+    #[Groups(['read_person', 'write_person', "read_professor" , "write_professor", "read_student", "write_student", "read_director" ])]
+
     protected $roles = [];
 
     #[ORM\Column(type: 'string')]
-    #[Groups(['read_person', 'write_person' ])]
+    #[Groups(['read_person', 'write_person', "read_professor" , "write_professor", "read_student", "write_student", "read_director" ])]
+
     protected $password;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
-    #[Groups(['read_person', 'write_person' ])]
+    #[Groups(['read_person', 'write_person', "read_professor" , "write_professor", "read_student", "write_student", "read_director" ])]
+
     protected $Username;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read_person', 'write_person' ])]
+    #[Groups(['read_person', 'write_person', "read_professor" , "write_professor", "read_student", "write_student", "read_director", "read_director" ])]
+
     protected $Name;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read_person', 'write_person' ])]
+    #[Groups(['read_person', 'write_person', "read_professor" , "write_professor", "read_student", "write_student", "read_director" ])]
+
     protected $FirstName;
 
     public function getId(): ?int
