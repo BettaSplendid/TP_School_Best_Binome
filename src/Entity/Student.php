@@ -21,7 +21,7 @@ class Student extends Person
 
     #[ORM\Column(type: 'boolean')]
     #[Groups(['read_student', 'write_student' ])]
-    private $Gender;
+    private $gender;
 
     #[ORM\JoinColumn(onDelete:"CASCADE")]
     #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'Eleve')]
@@ -54,12 +54,12 @@ class Student extends Person
 
     public function getGender(): ?bool
     {
-        return $this->Gender;
+        return $this->gender;
     }
 
-    public function setGender(bool $Gender): self
+    public function setGender(bool $gender): self
     {
-        $this->Gender = $Gender;
+        $this->gender = $gender;
 
         return $this;
     }

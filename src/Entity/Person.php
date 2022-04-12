@@ -42,17 +42,17 @@ abstract class Person implements UserInterface, PasswordAuthenticatedUserInterfa
     #[ORM\Column(type: 'string', length: 255, unique: true)]
     #[Groups(['read_person', 'write_person', "read_professor" , "write_professor", "read_student", "write_student", "read_director" ])]
 
-    protected $Username;
+    protected $username;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Groups(['read_person', 'write_person', "read_professor" , "write_professor", "read_student", "write_student", "read_director", "read_director" ])]
-
-    protected $Name;
+    
+    protected $name;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Groups(['read_person', 'write_person', "read_professor" , "write_professor", "read_student", "write_student", "read_director" ])]
 
-    protected $FirstName;
+    protected $firstname;
 
     public function getId(): ?int
     {
@@ -126,36 +126,36 @@ abstract class Person implements UserInterface, PasswordAuthenticatedUserInterfa
 
     public function getUsername(): ?string
     {
-        return $this->Username;
+        return $this->username;
     }
 
-    public function setUsername(string $Username): self
+    public function setUsername(string $username): self
     {
-        $this->Username = $Username;
+        $this->username = $username;
 
         return $this;
     }
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getFirstName(): ?string
+    public function getFirstname(): ?string
     {
-        return $this->FirstName;
+        return $this->firstname;
     }
 
-    public function setFirstName(string $FirstName): self
+    public function setFirstname(string $firstname): self
     {
-        $this->FirstName = $FirstName;
+        $this->firstname = $firstname;
 
         return $this;
     }

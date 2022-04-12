@@ -13,17 +13,17 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Professor extends Person
 {
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', nullable:true )]
     #[Groups(['read_professor', 'write_professor'])]
-    private $Age;
+    private $age;
 
-    #[ORM\Column(type: 'date')]
+    #[ORM\Column(type: 'date', nullable:true)]
     #[Groups(['read_professor', 'write_professor'])]
-    private $ArrivalDate;
+    private $arrivaldate;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', nullable:true )]
     #[Groups(['read_professor', 'write_professor'])]
-    private $Salary;
+    private $salary;
 
     #[ORM\OneToOne(mappedBy: 'Instit', targetEntity: Section::class, cascade: ['persist', 'remove'])]
     #[Groups(['read_professor', 'write_professor'])]
@@ -31,36 +31,36 @@ class Professor extends Person
 
     public function getAge(): ?int
     {
-        return $this->Age;
+        return $this->age;
     }
 
-    public function setAge(int $Age): self
+    public function setAge(int $age): self
     {
-        $this->Age = $Age;
+        $this->age = $age;
 
         return $this;
     }
 
-    public function getArrivalDate(): ?\DateTimeInterface
+    public function getArrivaldate(): ?\DateTimeInterface
     {
-        return $this->ArrivalDate;
+        return $this->arrivaldate;
     }
 
-    public function setArrivalDate(\DateTimeInterface $ArrivalDate): self
+    public function setArrivaldate(\DateTimeInterface $arrivaldate): self
     {
-        $this->ArrivalDate = $ArrivalDate;
+        $this->arrivaldate = $arrivaldate;
 
         return $this;
     }
 
     public function getSalary(): ?int
     {
-        return $this->Salary;
+        return $this->salary;
     }
 
-    public function setSalary(int $Salary): self
+    public function setSalary(int $salary): self
     {
-        $this->Salary = $Salary;
+        $this->Salary = $salary;
 
         return $this;
     }

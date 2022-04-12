@@ -62,7 +62,7 @@ class AppFixtures extends Fixture
 
         $special_student = new Student();
         $special_student_password = $this->encoder->hashPassword($special_student, "123");
-        $special_student->setFirstName("Amelie")->setName("KLEIN")->setUsername("ak54")->setEmail("ak@gmail.com")->setGender(0);
+        $special_student->setFirstname("Amelie")->setName("KLEIN")->setUsername("ak54")->setEmail("ak@gmail.com")->setGender(0);
         $special_student->setSection($manager->getRepository(Section::class)->findBy(['Name' => 'CP'])[0]);
         $special_student->setParentEmail1("22@gmaikl.fr");
         $special_student->setPassword($special_student_password);
@@ -71,7 +71,7 @@ class AppFixtures extends Fixture
 
         $special_student_2 = new Student();
         $special_student_2_password = $this->encoder->hashPassword($special_student_2, "123");
-        $special_student_2->setFirstName("Amelie")->setName("KLEIN")->setUsername("ak542")->setEmail("ak2@gmail.com")->setGender(0);
+        $special_student_2->setFirstname("Amelie")->setName("KLEIN")->setUsername("ak542")->setEmail("ak2@gmail.com")->setGender(0);
         $special_student_2->setParentEmail1("22@gmaikl.fr");
         $special_student_2->setPassword($special_student_2_password);
         
@@ -79,7 +79,7 @@ class AppFixtures extends Fixture
 
         $director = new Director();
         $director_password = $this->encoder->hashPassword($director, "director");
-        $director->setFirstName("Jean-Jacques")->setName("Goldman")->setUsername("admin")->setEmail("admin@gmail.com")-> setRoles(["ROLE_ADMIN"]);
+        $director->setFirstname("Jean-Jacques")->setName("Goldman")->setUsername("admin")->setEmail("admin@gmail.com")-> setRoles(["ROLE_ADMIN"]);
         $director->setPassword($director_password);
         
         $manager->persist($director);
@@ -93,12 +93,12 @@ class AppFixtures extends Fixture
                 // var_dump($myarray["CP"][$key0]);
                 $pieces = explode(" ", $myarray[$current_array][$key]);
                 $student = new Student();
-                $student->setFirstName($pieces[0])-> setRoles(["ROLE_STUDENT"]);
+                $student->setFirstname($pieces[0])-> setRoles(["ROLE_STUDENT"]);
                 $student->setName($pieces[1]);
-                $student->setUsername($student->getName() . $student->getFirstName() . "du" . rand(0, 100));
+                $student->setUsername($student->getName() . $student->getFirstname() . "du" . rand(0, 100));
                 $student->setEmail(($student->getUsername() . rand() . "@" . $faker->freeEmailDomain));
-                $student->setParentEmail1(($student->getName() . $faker->firstName . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
-                $student->setParentEmail2(($student->getName() . $faker->firstName . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
+                $student->setParentEmail1(($student->getName() . $faker->firstname . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
+                $student->setParentEmail2(($student->getName() . $faker->firstname . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
                 $student->setGender((bool) mt_rand(0, 1));
                 $student->setPassword(rand());
                 $student->setSection($manager->getRepository(Section::class)->findOneBy(['Name' => $current_array]));
@@ -121,14 +121,14 @@ class AppFixtures extends Fixture
             // var_dump($all_profs[$key]);
             $prof = (new Professor())-> setRoles(["ROLE_PROF"]) ;
             $prof->setName($all_profs[$key]->name);
-            $prof->setFirstName($all_profs[$key]->firstname);
+            $prof->setFirstname($all_profs[$key]->firstname);
             $prof->setSection($manager->getRepository(Section::class)->findBy(['Name' => $all_profs[$key]->section])[0]);
             $prof->setPassword(rand());
 
-            $prof->SetEmail($prof->getName() . $prof->getFirstName() . "@" . $faker->freeEmailDomain);
-            $prof->setUsername($prof->getName() . $prof->getFirstName() . "teach");
+            $prof->SetEmail($prof->getName() . $prof->getFirstname() . "@" . $faker->freeEmailDomain);
+            $prof->setUsername($prof->getName() . $prof->getFirstname() . "teach");
             $prof->setAge(rand(18, 60));
-            $prof->setArrivalDate(new \DateTime());
+            $prof->setArrivaldate(new \DateTime());
             $prof->setSalary(rand(1000, 2300));
             $manager->persist($prof);
         }
