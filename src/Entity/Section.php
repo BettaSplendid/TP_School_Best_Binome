@@ -22,7 +22,7 @@ class Section
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Groups(['read_section', 'write_section' ])]
-    private $Name;
+    private $name;
 
     #[ORM\JoinColumn(onDelete:"CASCADE")]
     #[ORM\OneToOne(inversedBy: 'section', targetEntity: Professor::class, cascade: ['persist', 'remove'])]
@@ -45,12 +45,12 @@ class Section
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }

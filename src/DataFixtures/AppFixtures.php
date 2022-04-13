@@ -63,7 +63,7 @@ class AppFixtures extends Fixture
         $special_student = new Student();
         $special_student_password = $this->encoder->hashPassword($special_student, "123");
         $special_student->setFirstname("Amelie")->setName("KLEIN")->setUsername("ak54")->setEmail("ak@gmail.com")->setGender(0);
-        $special_student->setSection($manager->getRepository(Section::class)->findBy(['Name' => 'CP'])[0]);
+        $special_student->setSection($manager->getRepository(Section::class)->findBy(['name' => 'CP'])[0]);
         $special_student->setParent1("22@gmaikl.fr");
         $special_student->setPassword($special_student_password);
 
@@ -101,7 +101,7 @@ class AppFixtures extends Fixture
                 $student->setParent2(($student->getName() . $faker->firstname . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
                 $student->setGender((bool) mt_rand(0, 1));
                 $student->setPassword(rand());
-                $student->setSection($manager->getRepository(Section::class)->findOneBy(['Name' => $current_array]));
+                $student->setSection($manager->getRepository(Section::class)->findOneBy(['name' => $current_array]));
                 $manager->persist($student);
                 $manager->flush();
             }
@@ -122,7 +122,7 @@ class AppFixtures extends Fixture
             $prof = (new Professor())-> setRoles(["ROLE_PROF"]) ;
             $prof->setName($all_profs[$key]->name);
             $prof->setFirstname($all_profs[$key]->firstname);
-            $prof->setSection($manager->getRepository(Section::class)->findBy(['Name' => $all_profs[$key]->section])[0]);
+            $prof->setSection($manager->getRepository(Section::class)->findBy(['name' => $all_profs[$key]->section])[0]);
             $prof->setPassword(rand());
 
             $prof->SetEmail($prof->getName() . $prof->getFirstname() . "@" . $faker->freeEmailDomain);
