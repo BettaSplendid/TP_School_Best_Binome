@@ -19,11 +19,14 @@ class Grades
 
     #[ORM\Column(type: 'float')]
     #[Groups(['read_grades', 'write_grades' ])]
-    private $Grade;
+    private $grade;
 
     #[ORM\ManyToOne(targetEntity: Matter::class, inversedBy: 'grades')]
     #[Groups(['read_grades', 'write_grades' ])]
-    private $matter_id;
+    private $matter;
+
+    #[ORM\ManyToOne(targetEntity: Student::class, inversedBy: 'grades')]
+    private $eleve;
 
     public function getId(): ?int
     {
@@ -32,24 +35,36 @@ class Grades
 
     public function getGrade(): ?float
     {
-        return $this->Grade;
+        return $this->grade;
     }
 
-    public function setGrade(float $Grade): self
+    public function setGrade(float $grade): self
     {
-        $this->Grade = $Grade;
+        $this->grade = $grade;
 
         return $this;
     }
 
-    public function getMatterId(): ?Matter
+    public function getMatter(): ?Matter
     {
-        return $this->matter_id;
+        return $this->matter;
     }
 
-    public function setMatterId(?Matter $matter_id): self
+    public function setMatter(?Matter $matter): self
     {
-        $this->matter_id = $matter_id;
+        $this->matter = $matter;
+
+        return $this;
+    }
+
+    public function getEleve(): ?Student
+    {
+        return $this->eleve;
+    }
+
+    public function setEleve(?Student $eleve): self
+    {
+        $this->eleve = $eleve;
 
         return $this;
     }

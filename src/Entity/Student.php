@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\StudentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
@@ -27,6 +29,14 @@ class Student extends Person
     #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'Eleve')]
     #[Groups(['read_student', 'write_student' ])]
     private $section;
+
+    #[ORM\OneToMany(mappedBy: 'eleve', targetEntity: Grades::class)]
+    private $grades;
+
+    public function __construct()
+    {
+        $this->grades = new ArrayCollection();
+    }
 
     public function getParent1(): ?string
     {
@@ -72,6 +82,36 @@ class Student extends Person
     public function setSection(?Section $section): self
     {
         $this->section = $section;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Grades>
+     */
+    public function getGrades(): Collection
+    {
+        return $this->grades;
+    }
+
+    public function addGrade(Grades $grade): self
+    {
+        if (!$this->grades->contains($grade)) {
+            $this->grades[] = $grade;
+            $grade->setEleve($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGrade(Grades $grade): self
+    {
+        if ($this->grades->removeElement($grade)) {
+            // set the owning side to null (unless already changed)
+            if ($grade->getEleve() === $this) {
+                $grade->setEleve(null);
+            }
+        }
 
         return $this;
     }

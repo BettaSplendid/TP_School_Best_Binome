@@ -22,7 +22,7 @@ class Matter
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Groups(['read_matter', 'write_matter' ])]
-    private $Title;
+    private $title;
 
     #[ORM\OneToMany(mappedBy: 'matter_id', targetEntity: Grades::class)]
     #[Groups(['read_matter', 'write_matter' ])]
@@ -40,12 +40,12 @@ class Matter
 
     public function getTitle(): ?string
     {
-        return $this->Title;
+        return $this->title;
     }
 
-    public function setTitle(string $Title): self
+    public function setTitle(string $title): self
     {
-        $this->Title = $Title;
+        $this->title = $title;
 
         return $this;
     }

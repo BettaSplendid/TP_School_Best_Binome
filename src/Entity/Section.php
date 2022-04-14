@@ -27,15 +27,15 @@ class Section
     #[ORM\JoinColumn(onDelete:"CASCADE")]
     #[ORM\OneToOne(inversedBy: 'section', targetEntity: Professor::class, cascade: ['persist', 'remove'])]
     #[Groups(['read_section', 'write_section' ])]
-    private $Instit;
+    private $instit;
 
     #[ORM\OneToMany(mappedBy: 'section', targetEntity: Student::class)]
     #[Groups(['read_section', 'write_section' ])]
-    private $Eleve;
+    private $eleve;
 
     public function __construct()
     {
-        $this->Eleve = new ArrayCollection();
+        $this->eleve = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -57,12 +57,12 @@ class Section
 
     public function getInstit(): ?Professor
     {
-        return $this->Instit;
+        return $this->instit;
     }
 
-    public function setInstit(?Professor $Instit): self
+    public function setInstit(?Professor $instit): self
     {
-        $this->Instit = $Instit;
+        $this->instit = $instit;
 
         return $this;
     }
@@ -77,8 +77,8 @@ class Section
 
     public function addEleve(Student $eleve): self
     {
-        if (!$this->Eleve->contains($eleve)) {
-            $this->Eleve[] = $eleve;
+        if (!$this->eleve->contains($eleve)) {
+            $this->eleve[] = $eleve;
             $eleve->setSection($this);
         }
 
@@ -87,7 +87,7 @@ class Section
 
     public function removeEleve(Student $eleve): self
     {
-        if ($this->Eleve->removeElement($eleve)) {
+        if ($this->eleve->removeElement($eleve)) {
             // set the owning side to null (unless already changed)
             if ($eleve->getSection() === $this) {
                 $eleve->setSection(null);

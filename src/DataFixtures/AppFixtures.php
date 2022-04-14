@@ -5,6 +5,8 @@ namespace App\DataFixtures;
 use App\Entity\Professor;
 use App\Entity\Section;
 use App\Entity\Student;
+use App\Entity\Matter;
+use App\Entity\Grades;
 use App\Entity\Director;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -54,6 +56,20 @@ class AppFixtures extends Fixture
         $manager->persist($cm2);
         $manager->flush();
 
+        var_dump('Generating Matters');
+
+        $m1 = (new Matter())->setTitle('Histoire-géographie');
+        $m2 = (new Matter())->setTitle('Français');
+        $m3 = (new Matter())->setTitle('Mathématiques');
+        $m4 = (new Matter())->setTitle('Sciences');
+        $m5 = (new Matter())->setTitle('Sport');
+
+        $manager->persist($m1);
+        $manager->persist($m2);
+        $manager->persist($m3);
+        $manager->persist($m4);
+        $manager->persist($m5);
+
         var_dump("Generating Students: ");
 
         //faux etudiant pour connexion 
@@ -99,8 +115,27 @@ class AppFixtures extends Fixture
                 $student->setParent2(($student->getName() . $faker->firstname . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
                 $student->setGender((bool) mt_rand(0, 1));
                 $student->setPassword(rand());
+
+                $grade1=(new Grades())->setGrade(rand(0, 20))->setMatter($m1)->setEleve($student);
+                $manager->persist($grade1);
+
+                $grade2=(new Grades())->setGrade(rand(0, 20))->setMatter($m2)->setEleve($student);
+                $manager->persist($grade2);
+
+                $grade3=(new Grades())->setGrade(rand(0, 20))->setMatter($m3)->setEleve($student);
+                $manager->persist($grade3);
+
+                $grade4=(new Grades())->setGrade(rand(0, 20))->setMatter($m4)->setEleve($student);
+                $manager->persist($grade4);
+
+                $grade5=(new Grades())->setGrade(rand(0, 20))->setMatter($m5)->setEleve($student);
+                $manager->persist($grade5);
+
+
                 $student->setSection($manager->getRepository(Section::class)->findOneBy(['name' => $current_array]));
                 $manager->persist($student);
+
+
                 $manager->flush();
             }
         }
