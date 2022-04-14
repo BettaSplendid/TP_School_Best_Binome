@@ -54,8 +54,6 @@ class AppFixtures extends Fixture
         $manager->persist($cm2);
         $manager->flush();
 
-
-
         var_dump("Generating Students: ");
 
         //faux etudiant pour connexion 
