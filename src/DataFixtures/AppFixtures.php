@@ -72,14 +72,14 @@ class AppFixtures extends Fixture
         $special_student_2->setFirstname("Amelie")->setName("KLEIN")->setUsername("ak542")->setEmail("ak2@gmail.com")->setGender(0);
         $special_student_2->setParent1("22@gmaikl.fr");
         $special_student_2->setPassword($special_student_2_password);
-        
+
         $manager->persist($special_student_2);
 
         $director = new Director();
         $director_password = $this->encoder->hashPassword($director, "director");
-        $director->setFirstname("Jean-Jacques")->setName("Goldman")->setUsername("admin")->setEmail("admin@gmail.com")-> setRoles(["ROLE_ADMIN"]);
+        $director->setFirstname("Jean-Jacques")->setName("Goldman")->setUsername("admin")->setEmail("admin@gmail.com")->setRoles(["ROLE_ADMIN"]);
         $director->setPassword($director_password);
-        
+
         $manager->persist($director);
 
 
@@ -91,7 +91,7 @@ class AppFixtures extends Fixture
                 // var_dump($myarray["CP"][$key0]);
                 $pieces = explode(" ", $myarray[$current_array][$key]);
                 $student = new Student();
-                $student->setFirstname($pieces[0])-> setRoles(["ROLE_STUDENT"]);
+                $student->setFirstname($pieces[0])->setRoles(["ROLE_STUDENT"]);
                 $student->setName($pieces[1]);
                 $student->setUsername($student->getName() . $student->getFirstname() . "du" . rand(0, 100));
                 $student->setEmail(($student->getUsername() . rand() . "@" . $faker->freeEmailDomain));
@@ -117,7 +117,7 @@ class AppFixtures extends Fixture
         // var_dump($all_profs);
         foreach ($all_profs as $key => $value) {
             // var_dump($all_profs[$key]);
-            $prof = (new Professor())-> setRoles(["ROLE_PROF"]) ;
+            $prof = (new Professor())->setRoles(["ROLE_PROF"]);
             $prof->setName($all_profs[$key]->name);
             $prof->setFirstname($all_profs[$key]->firstname);
             $prof->setSection($manager->getRepository(Section::class)->findBy(['name' => $all_profs[$key]->section])[0]);
@@ -126,8 +126,8 @@ class AppFixtures extends Fixture
             $prof->SetEmail($prof->getName() . $prof->getFirstname() . "@" . $faker->freeEmailDomain);
             $prof->setUsername($prof->getName() . $prof->getFirstname() . "teach");
             $prof->setAge(rand(18, 60));
-            $prof->setArrivaldate(new \DateTime());
             $prof->setSalary(rand(1000, 2300));
+            $prof->setArrivaldate(new \DateTime());
             $manager->persist($prof);
         }
 
