@@ -60,7 +60,7 @@ class Professor extends Person
 
     public function setSalary(int $salary): self
     {
-        $this->Salary = $salary;
+        $this->salary = $salary;
 
         return $this;
     }
