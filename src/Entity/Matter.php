@@ -24,7 +24,7 @@ class Matter
     #[Groups(['read_matter', 'write_matter' ])]
     private $title;
 
-    #[ORM\OneToMany(mappedBy: 'matter_id', targetEntity: Grades::class)]
+    #[ORM\OneToMany(mappedBy: 'matter', targetEntity: Grades::class)]
     #[Groups(['read_matter', 'write_matter' ])]
     private $grades;
 
