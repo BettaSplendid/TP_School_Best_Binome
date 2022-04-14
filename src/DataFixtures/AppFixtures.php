@@ -128,7 +128,7 @@ class AppFixtures extends Fixture
             $prof->SetEmail($prof->getName() . $prof->getFirstname() . "@" . $faker->freeEmailDomain);
             $prof->setUsername($prof->getName() . $prof->getFirstname() . "teach");
             $prof->setAge(rand(18, 60));
-            $prof->setSalary(50);
+            $prof->setSalary(rand(1000, 2300));
             $prof->setArrivaldate(new \DateTime());
             $manager->persist($prof);
         }
