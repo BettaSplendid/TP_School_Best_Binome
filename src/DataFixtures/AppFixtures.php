@@ -71,12 +71,11 @@ class AppFixtures extends Fixture
         $manager->persist($m5);
 
         var_dump("Generating Students: ");
-
         //faux etudiant pour connexion 
 
         $special_student = new Student();
         $special_student_password = $this->encoder->hashPassword($special_student, "123");
-        $special_student->setFirstname("Amelie")->setName("KLEIN")->setUsername("ak54")->setEmail("ak@gmail.com")->setGender(0);
+        $special_student->setFirstname("Amelie")->setName("KLEIN")->setUsername("ak54")->setEmail("ak@gmail.com")->setGender(0)->setRoles(["ROLE_PROF"]);
         $special_student->setSection($manager->getRepository(Section::class)->findBy(['name' => 'CP'])[0]);
         $special_student->setParent1("22@gmaikl.fr");
         $special_student->setPassword($special_student_password);
@@ -85,7 +84,7 @@ class AppFixtures extends Fixture
 
         $special_student_2 = new Student();
         $special_student_2_password = $this->encoder->hashPassword($special_student_2, "123");
-        $special_student_2->setFirstname("Amelie")->setName("KLEIN")->setUsername("ak542")->setEmail("ak2@gmail.com")->setGender(0);
+        $special_student_2->setFirstname("Amelie")->setName("KLEIN")->setUsername("ak542")->setEmail("ak2@gmail.com")->setGender(0)->setRoles(["ROLE_STUDENT"]);
         $special_student_2->setParent1("22@gmaikl.fr");
         $special_student_2->setPassword($special_student_2_password);
 
@@ -97,7 +96,6 @@ class AppFixtures extends Fixture
         $director->setPassword($director_password);
 
         $manager->persist($director);
-
 
         $liste_classes = array_keys($myarray);
 
@@ -114,7 +112,9 @@ class AppFixtures extends Fixture
                 $student->setParent1(($student->getName() . $faker->firstname . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
                 $student->setParent2(($student->getName() . $faker->firstname . $faker->cityPrefix . "@" . $faker->freeEmailDomain));
                 $student->setGender((bool) mt_rand(0, 1));
-                $student->setPassword(rand());
+
+                $student_password = $this->encoder->hashPassword($student, "pass");
+                $student->setPassword($student_password);
 
                 $grade1=(new Grades())->setGrade(rand(0, 20))->setMatter($m1)->setEleve($student);
                 $manager->persist($grade1);
@@ -131,10 +131,8 @@ class AppFixtures extends Fixture
                 $grade5=(new Grades())->setGrade(rand(0, 20))->setMatter($m5)->setEleve($student);
                 $manager->persist($grade5);
 
-
                 $student->setSection($manager->getRepository(Section::class)->findOneBy(['name' => $current_array]));
                 $manager->persist($student);
-
 
                 $manager->flush();
             }
