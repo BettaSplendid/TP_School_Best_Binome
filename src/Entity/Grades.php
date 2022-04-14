@@ -14,17 +14,18 @@ class Grades
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read_grades' ])]
+    #[Groups(['read_grades'])]
     private $id;
 
     #[ORM\Column(type: 'float')]
-    #[Groups(['read_grades', 'write_grades' ])]
+    #[Groups(['read_grades', 'write_grades'])]
     private $grade;
 
     #[ORM\ManyToOne(targetEntity: Matter::class, inversedBy: 'grades')]
-    #[Groups(['read_grades', 'write_grades' ])]
+    #[Groups(['read_grades', 'write_grades'])]
     private $matter;
 
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     #[ORM\ManyToOne(targetEntity: Student::class, inversedBy: 'grades')]
     private $eleve;
 

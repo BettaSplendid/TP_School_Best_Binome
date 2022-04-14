@@ -13,15 +13,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Professor extends Person
 {
 
-    #[ORM\Column(type: 'integer', nullable:true )]
+    #[ORM\Column(type: 'integer')]
     #[Groups(['read_professor', 'write_professor'])]
     private $age;
 
-    #[ORM\Column(type: 'date', nullable:true)]
+    #[ORM\Column(type: 'date', nullable: true)]
     #[Groups(['read_professor', 'write_professor'])]
     private $arrivaldate;
 
-    #[ORM\Column(type: 'integer', nullable:true )]
+    #[ORM\Column(type: 'integer')]
     #[Groups(['read_professor', 'write_professor'])]
     private $salary;
 
