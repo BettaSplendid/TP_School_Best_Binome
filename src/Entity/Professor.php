@@ -25,7 +25,7 @@ class Professor extends Person
     #[Groups(['read_professor', 'write_professor'])]
     private $salary;
 
-    #[ORM\OneToOne(mappedBy: 'Instit', targetEntity: Section::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'instit', targetEntity: Section::class, cascade: ['persist', 'remove'])]
     #[Groups(['read_professor', 'write_professor'])]
     private $section;
 

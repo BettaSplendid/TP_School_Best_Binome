@@ -72,7 +72,7 @@ class Section
      */
     public function getEleve(): Collection
     {
-        return $this->Eleve;
+        return $this->eleve;
     }
 
     public function addEleve(Student $eleve): self
