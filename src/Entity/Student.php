@@ -26,7 +26,7 @@ class Student extends Person
     private $gender;
 
     #[ORM\JoinColumn(onDelete:"SET NULL")]
-    #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'Eleve')]
+    #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'eleve')]
     #[Groups(['read_student', 'write_student' ])]
     private $section;
 

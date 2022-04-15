@@ -18,7 +18,7 @@ class Grades
     private $id;
 
     #[ORM\Column(type: 'float')]
-    #[Groups(['read_grades', 'write_grades'])]
+    #[Groups(['read_grades', 'write_grades', 'read_professor', 'read_student'])]
     private $grade;
 
     #[ORM\ManyToOne(targetEntity: Matter::class, inversedBy: 'grades')]

@@ -17,20 +17,20 @@ class Section
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read_section' ])]
+    #[Groups(['read_section'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read_section', 'write_section' ])]
+    #[Groups(['read_section', 'write_section', 'read_professor', 'read_student'])]
     private $name;
 
-    #[ORM\JoinColumn(onDelete:"SET NULL")]
+    #[ORM\JoinColumn(onDelete: "SET NULL")]
     #[ORM\OneToOne(inversedBy: 'section', targetEntity: Professor::class, cascade: ['persist', 'remove'])]
-    #[Groups(['read_section', 'write_section' ])]
+    #[Groups(['read_section', 'write_section',  'read_professor', 'read_student'])]
     private $instit;
 
     #[ORM\OneToMany(mappedBy: 'section', targetEntity: Student::class)]
-    #[Groups(['read_section', 'write_section' ])]
+    #[Groups(['read_section', 'write_section',  'read_professor', 'read_student'])]
     private $eleve;
 
     public function __construct()
