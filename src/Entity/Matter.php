@@ -24,6 +24,7 @@ class Matter
     #[Groups(['read_matter', 'write_matter' ])]
     private $title;
 
+    #[ORM\JoinColumn(onDelete:"CASCADE")]
     #[ORM\OneToMany(mappedBy: 'matter', targetEntity: Grades::class)]
     #[Groups(['read_matter', 'write_matter' ])]
     private $grades;
