@@ -25,7 +25,8 @@ class Grades
     #[Groups(['read_grades', 'write_grades'])]
     private $matter;
 
-    #[ORM\JoinColumn(onDelete: "CASCADE")]
+    #[ORM\JoinColumn(onDelete: "SET NULL")]
+    #[Groups(['read_grades', 'write_grades'])]
     #[ORM\ManyToOne(targetEntity: Student::class, inversedBy: 'grades')]
     private $eleve;
 
